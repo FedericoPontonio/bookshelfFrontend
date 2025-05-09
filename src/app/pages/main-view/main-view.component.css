@@ -1,0 +1,217 @@
+
+.mainComponentRoot {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    width: 98vw;
+    gap: 2px;
+    height: 97vh;
+}
+.leftColumn {
+    background-color: #efaf66da;
+    padding: 3%;
+    border-radius: 5px;
+    max-height: 100%;
+    overflow: auto;
+    
+}
+.rightColumn {
+    background-color: rgba(242, 136, 75, 0.879);
+    max-height: 100%;
+    display: grid;
+    grid-template-rows: 1fr 1fr 8fr;
+    gap: 5%;
+}
+#logoutButton {
+    margin: 3%;
+    border-radius: 30px;
+    font-size: 20px;
+    height: 50px;
+    background-color: #edcb7c;
+    box-shadow: 5px 5px 5px rgba(33, 32, 32, 0.311);
+
+}
+#logoutButton:active {
+    background-color: #e4ab25;
+    box-shadow: 2px 5px -3px #242323;
+    transform: translateY(4px) translateX(5px);
+    transition: 0.3s ease;
+  }
+  .addBookOptions {
+    display: grid;
+    grid-template-columns: 4fr 0.5fr 2fr;
+    gap: 20px;
+    align-items: center;
+    margin: 5px;
+  }
+  #addBookManually {
+    margin: 3%;
+    border-radius: 10px;
+    background-color: #97ee65c7;
+    box-shadow: 5px 5px 5px rgba(33, 32, 32, 0.311);
+  }
+  #addBookManually:active {
+    background-color: #97ee6588;
+    box-shadow: 1px 3px -2px #242323;
+    transform: translateY(2px) translateX(2px);
+    transition: 0.1s ease;
+  }
+  #addBookManuallyForm {
+    display: flex;
+    flex-direction: column;
+  }
+    /* Error messages */
+    .error {
+        color: rgb(117, 22, 22);
+      }
+.resultsDisplay {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 94%;
+    max-height: 96vh;
+    background-color: rgb(242, 136, 75);
+    padding: 3%;
+    overflow: auto;
+    gap: 10px;
+    transition: 1s ease;
+    border-radius: 5px;
+}
+.hideResultsDisplay {
+    height: 0px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.bookCell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: solid black 1px;
+    border-radius: 10px;
+    padding: 1%;
+    font-family: sans-serif;
+    font-size: 20px;
+    box-shadow: 10px 5px 5px rgba(33, 32, 32, 0.311);
+    background-color: rgb(224, 190, 148);
+    width: 250px;
+}
+.bookCell:hover {
+    background-color: rgba(190, 144, 76, 0.756);
+    transition: 0.3s ease;
+}
+
+.bookCover {
+    width: 200px;
+    height: 290px;
+}
+
+li {
+    list-style: none;
+}
+
+.savedBooksDisplay {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1%;
+    justify-content: space-around;
+    align-content: space-around;
+}
+
+.popupMessage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    box-shadow: 10px 5px 5px rgba(33, 32, 32, 0.311);
+    padding: 1%;
+    width: 30%;
+    height: fit-content;
+    font-size: 30px;
+    color: rgb(0, 0, 0);
+    position: absolute;
+    left: 40%;
+    top: 30%;
+    font-weight: 700;
+    font-family: sans-serif;
+    background-color: rgb(174, 166, 166);
+    z-index: 100;
+}
+.popupMessageInvisible {
+    display: none;
+}
+
+
+
+
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: slideIn 0.5s ease forwards;
+
+  }
+  
+  .modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgb(221, 126, 126);
+    padding: 1.5rem;
+    border-radius: 10px;
+    width: 40%;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  
+
+  button.danger {
+    background-color: #e53935;
+    color: white;
+    border: none;
+    padding: 0.5em 1em;
+    margin-top: 1em;
+    cursor: pointer;
+  }
+  button.danger:hover {
+    background-color: #c62828;
+  }
+
+  @keyframes slideIn {
+    0% {
+        transform: translateY(-100%); /* Start slightly above */
+    }
+    70% {
+        background-color: rgba(20, 24, 71, 0);
+        transform: translateY(0); /* End in place */
+    }
+    100% {
+        background-color: rgba(16, 19, 57, 0.838);
+    }
+}
+
+@keyframes slideOut {
+    0% {
+        display: flex;
+        background-color: rgba(16, 19, 57, 0.838);
+        transform: translateY(0); /* Start in place */
+    }
+    30% {
+        background-color: rgba(38, 49, 168, 0);
+        transform: translateY(0); /* End in place */
+    }
+    100% {
+        display: none;
+        transform: translateY(-100%); /* End slightly above */
+    }
+}
+
+.modal-content.hidden {
+  animation: slideOut 0.5s ease forwards;
+}

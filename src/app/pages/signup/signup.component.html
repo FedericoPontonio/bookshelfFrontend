@@ -1,0 +1,33 @@
+<div class="auth-container">
+    <h2 class="pageTitle">Sign Up</h2>
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <div class="formValidationMessage" *ngIf="signupForm.get('name')?.invalid && signupForm.get('name')?.touched">Please insert a username</div>
+    <label>Name:</label>
+      <input type="text" placeholder="Name" formControlName="name" />
+      
+      <label>Email:</label>
+      <div class="formValidationMessage" *ngIf="signupForm.get('email')?.errors?.['email'] && signupForm.get('email')?.touched">Invalid email format</div>
+      <div class="formValidationMessage" *ngIf="signupForm.get('email')?.errors?.['required'] && signupForm.get('email')?.touched">Email is required</div>
+      <div class="formValidationMessage" *ngIf="errorMessage && errorField == `email`">{{ errorMessage }}</div>
+      <input type="email" placeholder="Email" formControlName="email" />
+
+    <label>Password:</label>
+    <!-- Password required -->
+      <div class="formValidationMessage"*ngIf="signupForm.get('password')?.errors?.['required'] && signupForm.get('password')?.touched">Password is required</div>
+    <!-- Password too short -->
+    <div class="formValidationMessage" *ngIf="signupForm.get('password')?.errors?.['minlength'] && signupForm.get('password')?.touched">Password must be at least 4 characters</div>
+    <input type="password" placeholder="Password" formControlName="password" />
+
+    <label>Confirm Password:</label>
+    <div class="formValidationMessage" *ngIf="errorMessage && errorField === 'confirmPassword'">Password mismatch</div>
+    <input type="password" placeholder="Confirm Password" formControlName="confirmPassword" />
+    
+    <button type="submit" [disabled]="signupForm.invalid">Register</button>
+    <p>Already registered? <a href="/login">Log in</a></p>
+
+    </form>
+    <!-- to display unconfigured errors -->
+    <div class="error" *ngIf="errorMessage && errorField ==``">{{ errorMessage }}</div>
+
+  </div>
+  

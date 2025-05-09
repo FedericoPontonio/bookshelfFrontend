@@ -1,0 +1,116 @@
+<!-- main.component.html -->
+<div [ngClass]="popupMessageVisible ? '' : 'popupMessageInvisible'" class="popupMessage">{{popupMessage}}</div>
+
+<div class="modal" *ngIf="selectedBook" (click)="closeModal()">
+  <div class="modal-content"
+  [ngClass]="{'': isModalVisible, 'hidden': !isModalVisible}"
+  (click)="$event.stopPropagation()">
+    <h2>{{ selectedBook.title }}</h2>
+    <p><strong>Author:</strong> {{ selectedBook.author }}</p>
+    <img *ngIf="selectedBook.image" [src]="'https://covers.openlibrary.org/b/olid/' + selectedBook.image + '-M.jpg'" alt="Book cover" />
+    
+    <label for="notes">Personal Notes:</label>
+    <textarea [(ngModel)]="selectedBook.notes" id="notes"></textarea>
+    <button (click)="saveNotes()">💾 Update personal Notes</button>
+
+    <!-- Custom confirmation toggle -->
+    <div *ngIf="confirmingDelete; else deleteButton">
+      <p>Are you sure you want to delete this book?</p>
+      <button (click)="confirmDelete()">Yes</button>
+      <button (click)="confirmingDelete = false">No</button>
+    </div>
+    <ng-template #deleteButton>
+      <button (click)="confirmingDelete = true" class="danger">Delete</button>
+    </ng-template>
+    <button (click)="closeModal()">Close</button>
+  </div>
+</div>
+
+<div class="mainComponentRoot">
+
+  <div class="leftColumn">
+    <div id="pageDescription">
+      <h2>Welcome back, {{ userInfo?.name }}!</h2>
+      <p>Visualize and manage your saved books</p>
+    </div>
+    <div  class="savedBooksDisplay" *ngIf="userSavedBooks.length; else noBooks">
+      <div (click)="openModal(book)" class="bookCell"  *ngFor="let book of userSavedBooks">
+        <strong style="max-width: 200px;">{{ book.title }}</strong>
+        <img class="bookCover" [src]="book.image ? 'https://covers.openlibrary.org/b/olid/' + book.image + '-M.jpg' : 'https://bakerpublishinggroup.com/covers/original/missing.png'" alt="Book cover">
+        Author: <em>{{ book.author }}</em>
+      </div>
+    </div>
+  </div>
+
+  <div class="rightColumn">
+    <div style="display: grid; grid-template-columns: 2fr 1fr; align-items: center; border-bottom: dashed black 2px;">
+      <h2 style="border-right: solid black 2px; height: 40px; align-items: center; display: flex; margin-left: 10px;">Add new books</h2>
+      <button id="logoutButton" (click)="logout()">Log out</button>
+    </div>
+
+    <div class="addBookOptions">
+      <div>
+        <h3>Search for books to add to your collection</h3>
+        <div *ngIf="isLoading"><strong>Loading your books...</strong></div>
+        <input (input)="onSearch(searchTerm)" [(ngModel)]="searchTerm" placeholder="Search for books" />
+      </div>
+      <strong>OR</strong>
+      <button id="addBookManually" (click)="openManualAddModal()">Add Manually</button>
+    </div>
+
+    <ul class="resultsDisplay" [ngClass]="{'hideResultsDisplay': !isLoading && searchedBooks.length < 1}">
+      <li class="bookCell"  *ngFor="let book of searchedBooks" (click)="promptAddBook(book)">
+        {{ book.title }}
+        <img class="bookCover"
+        [src]="book.cover_edition_key ? 'https://covers.openlibrary.org/b/olid/' + (book.cover_edition_key != null ? book.cover_edition_key : book.cover_i) + '-M.jpg' : 'https://bakerpublishinggroup.com/covers/original/missing.png'"
+        alt="Book cover">
+        <br>
+        by {{ book.author_name?.[0] }}
+      </li>
+    </ul>
+  </div>
+
+
+    <!-- modal for adding a book from openLibrary -->
+    <div class="modal" *ngIf="confirmingAdd" (click)="closeModal()">
+      <div class="modal-content">
+        
+        <p>Are you sure you want to add <strong>“{{ pendingBookToAdd?.title }}”</strong>  to your collection?</p>
+        <button (click)="confirmAddBook()">Yes</button>
+        <button (click)="cancelAddBook()">No</button>
+      </div>
+    </div>
+
+    <!-- modal for adding a book manually -->
+    <div class="modal" *ngIf="pendingBookToAdd && !selectedBook && isManualAddModalVisible" (click)="closeModal()">
+      <div class="modal-content" (click)="$event.stopPropagation()">
+        <h2>Add personalized book informations</h2>
+    
+        <form id="addBookManuallyForm" #manualForm="ngForm" (ngSubmit)="confirmAddBook()" novalidate>
+
+          <label>Title:</label>
+          <div class="error" *ngIf="titleRef.invalid && titleRef.touched">Title is required.</div>
+          <input [(ngModel)]="pendingBookToAdd.title" name="title" required #titleRef="ngModel" />
+        
+          <label>Author:</label>
+          <div class="error" *ngIf="authorRef.invalid && authorRef.touched">Author is required.</div>
+          <input [(ngModel)]="pendingBookToAdd.author" name="author" required #authorRef="ngModel" />
+        
+          <label>Cover Image Key (optional):</label>
+          <input [(ngModel)]="pendingBookToAdd.image" name="image" />
+        
+          <div *ngIf="pendingBookToAdd.image">
+            <p>Preview:</p>
+            <img [src]="'https://covers.openlibrary.org/b/olid/' + pendingBookToAdd.image + '-M.jpg'" alt="Book cover" />
+          </div>
+        
+          <button type="submit" [disabled]="manualForm.invalid">Add Book</button>
+          <button type="button" (click)="cancelAddBook()">Cancel</button>
+        </form>
+      </div>
+    </div>
+    
+  <ng-template #noBooks>
+    <p>No books found.</p>
+  </ng-template>
+</div>

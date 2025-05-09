@@ -1,0 +1,24 @@
+<h2 class="pageTitle">Log in</h2>
+<div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  
+    <label>Email:</label>
+    <div class="formValidationMessage" *ngIf="loginForm.get('email')?.errors?.['email'] && loginForm.get('email')?.touched">Invalid email format</div>
+    <div class="formValidationMessage" *ngIf="loginForm.get('email')?.errors?.['required'] && loginForm.get('email')?.touched">Insert you email</div>
+    <div class="formValidationMessage" *ngIf="errorMessage && errorField == `email`">{{ errorMessage }}</div>
+    <input type="email" formControlName="email" placeholder="Email" />
+  
+    <label>Password:</label>
+    <div class="formValidationMessage" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">Password is required</div>
+    <input type="password" formControlName="password" placeholder="password" />  
+    <button type="submit" [disabled]="loginForm.invalid">Login</button>
+
+    <p>You don't have an account yet?
+      <a 
+        routerLink="/signup"
+        href="/signup">Register here
+      </a>
+    </p>
+  </form>
+  

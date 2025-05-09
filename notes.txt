@@ -1,0 +1,26 @@
+
+
+ in "production" I need to check url for handling interceptor exeptio. I hardcoded "localhost" as condition to use interceptor, this will change when the backend will be online hosted.
+
+ todo:
+ -gestire aggiunta libri duplicati - testare con db online  -- done
+ -api delete book -- done
+ -----------------------------------------------1 giorno
+
+ -bottoni per aggiungere/eliminare libri -- done
+ -aggiunta manuale libri -- done
+ -aggiungere note come parametro nei libri ed api PUT per modificare il contenuto. -- done
+ -----------------------------------------------1 giorno
+
+ -grafica.
+        -titolo (anche in login)
+        -aggiunta manuale e immagine. gestire la cosa - opzionale
+        -quando OLID non è valido non viene messa l'immagine default  - opzionale
+        -menzionare esplicitamente openlibrary nella mia pagina
+ -----------------------------------------------1 giorno
+- capire perchè la ricerca dei libri è diventata lenta e graficamente buggata
+ -mettere online backend e frontend.
+ -----------------------------------------------1 giorno
+ -preparare discorso
+
+
