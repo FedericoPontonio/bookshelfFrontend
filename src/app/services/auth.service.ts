@@ -15,7 +15,7 @@ export interface DecodedToken {
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:5154/api/Auth/login';
+  private apiUrl = 'https://bookshelf-fuio.onrender.com/api/Auth/login';
 
   constructor(private http: HttpClient, private router: Router) {}
 

@@ -20,7 +20,7 @@ export interface CreateBookDTO {
   providedIn: 'root'
 })
 export class UserBooksProviderService {
-  private apiUrl = 'http://localhost:5154/api/Book';
+  private apiUrl = 'https://bookshelf-fuio.onrender.com/api/Book';
   constructor(private http: HttpClient) { }
 
   getBooksByUserId(userId: number): Observable<Book[]> {
