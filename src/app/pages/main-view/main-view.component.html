@@ -30,8 +30,12 @@
 
   <div class="leftColumn">
     <div id="pageDescription">
-      <h2>Welcome back, {{ userInfo?.name }}!</h2>
-      <p>Visualize and manage your saved books</p>
+      <div>
+        <h2>Welcome back, {{ userInfo?.name }}!</h2>
+        <p>Visualize and manage your saved books</p>  
+      </div>
+      <img src="assets/iconAndTitle.png" alt="gnatto">
+      <button id="logoutButton" (click)="logout()">Log out</button>
     </div>
     <div  class="savedBooksDisplay" *ngIf="userSavedBooks.length; else noBooks">
       <div (click)="openModal(book)" class="bookCell"  *ngFor="let book of userSavedBooks">
@@ -43,11 +47,7 @@
   </div>
 
   <div class="rightColumn">
-    <div style="display: grid; grid-template-columns: 2fr 1fr; align-items: center; border-bottom: dashed black 2px;">
-      <h2 style="border-right: solid black 2px; height: 40px; align-items: center; display: flex; margin-left: 10px;">Add new books</h2>
-      <button id="logoutButton" (click)="logout()">Log out</button>
-    </div>
-
+      <h2 style="display: flex; justify-content: center; grid-template-columns: 2fr 1fr; align-items: center; border-bottom: dashed black 2px;">Add new books</h2>
     <div class="addBookOptions">
       <div>
         <h3>Search for books to add to your collection</h3>
