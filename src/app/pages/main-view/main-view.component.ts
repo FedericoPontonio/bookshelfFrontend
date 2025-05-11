@@ -125,6 +125,7 @@ confirmDelete() {
       error: (err) => {
         console.error('Error fetching books', err);
         this.isLoading = false;
+        this.searchedBooks = [];
       }
     });
   }

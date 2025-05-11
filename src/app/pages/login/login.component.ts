@@ -40,6 +40,9 @@ export class LoginComponent {
       error: (err: any) => {
         if (err.status ===401) {
           this.errorMessage = 'Invalid credentials'
+          setTimeout(()=>{
+            this.errorMessage = '';
+          }, 2000)
         }
         console.error('Login failed:', err);
       }

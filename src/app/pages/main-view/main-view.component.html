@@ -1,41 +1,19 @@
 <!-- main.component.html -->
 <div [ngClass]="popupMessageVisible ? '' : 'popupMessageInvisible'" class="popupMessage">{{popupMessage}}</div>
 
-<div class="modal" *ngIf="selectedBook" (click)="closeModal()">
-  <div class="modal-content"
-  [ngClass]="{'': isModalVisible, 'hidden': !isModalVisible}"
-  (click)="$event.stopPropagation()">
-    <h2>{{ selectedBook.title }}</h2>
-    <p><strong>Author:</strong> {{ selectedBook.author }}</p>
-    <img *ngIf="selectedBook.image" [src]="'https://covers.openlibrary.org/b/olid/' + selectedBook.image + '-M.jpg'" alt="Book cover" />
-    
-    <label for="notes">Personal Notes:</label>
-    <textarea [(ngModel)]="selectedBook.notes" id="notes"></textarea>
-    <button (click)="saveNotes()">💾 Update personal Notes</button>
+<div id="topViewBar">
+  <h2>Welcome back, {{ userInfo?.name }}!</h2>
+  <button id="logoutButton" (click)="logout()">Log out</button>
 
-    <!-- Custom confirmation toggle -->
-    <div *ngIf="confirmingDelete; else deleteButton">
-      <p>Are you sure you want to delete this book?</p>
-      <button (click)="confirmDelete()">Yes</button>
-      <button (click)="confirmingDelete = false">No</button>
-    </div>
-    <ng-template #deleteButton>
-      <button (click)="confirmingDelete = true" class="danger">Delete</button>
-    </ng-template>
-    <button (click)="closeModal()">Close</button>
-  </div>
 </div>
-
 <div class="mainComponentRoot">
-
   <div class="leftColumn">
     <div id="pageDescription">
-      <div>
-        <h2>Welcome back, {{ userInfo?.name }}!</h2>
-        <p>Visualize and manage your saved books</p>  
+      <div id="title">
+        <img src="assets/icon.png" alt="gnatto">
+        <h1>Bookshelf</h1>
       </div>
-      <img src="assets/iconAndTitle.png" alt="gnatto">
-      <button id="logoutButton" (click)="logout()">Log out</button>
+      <h3>Visualize and manage your saved books</h3>  
     </div>
     <div  class="savedBooksDisplay" *ngIf="userSavedBooks.length; else noBooks">
       <div (click)="openModal(book)" class="bookCell"  *ngFor="let book of userSavedBooks">
@@ -47,12 +25,12 @@
   </div>
 
   <div class="rightColumn">
-      <h2 style="display: flex; justify-content: center; grid-template-columns: 2fr 1fr; align-items: center; border-bottom: dashed black 2px;">Add new books</h2>
+      <h2 id="rightColumnTitle">Add new books</h2>
     <div class="addBookOptions">
       <div>
         <h3>Search for books to add to your collection</h3>
         <div *ngIf="isLoading"><strong>Loading your books...</strong></div>
-        <input (input)="onSearch(searchTerm)" [(ngModel)]="searchTerm" placeholder="Search for books" />
+        <input id="searchBooksInput" (input)="onSearch(searchTerm)" [(ngModel)]="searchTerm" placeholder="Search for books" />
       </div>
       <strong>OR</strong>
       <button id="addBookManually" (click)="openManualAddModal()">Add Manually</button>
@@ -109,7 +87,33 @@
         </form>
       </div>
     </div>
+
+    <!-- modal for manage saved books -->
+    <div class="modal" *ngIf="selectedBook" (click)="closeModal()">
+      <div class="modal-content"
+      [ngClass]="{'': isModalVisible, 'hidden': !isModalVisible}"
+      (click)="$event.stopPropagation()">
+        <h2>{{ selectedBook.title }}</h2>
+        <p><strong>Author:</strong> {{ selectedBook.author }}</p>
+        <img *ngIf="selectedBook.image" [src]="'https://covers.openlibrary.org/b/olid/' + selectedBook.image + '-M.jpg'" alt="Book cover" />
+        
+        <label for="notes">Personal Notes:</label>
+        <textarea [(ngModel)]="selectedBook.notes" id="notes"></textarea>
+        <button (click)="saveNotes()">💾 Update personal Notes</button>
     
+        <!-- Custom confirmation toggle -->
+        <div *ngIf="confirmingDelete; else deleteButton">
+          <p>Are you sure you want to delete this book?</p>
+          <button (click)="confirmDelete()">Yes</button>
+          <button (click)="confirmingDelete = false">No</button>
+        </div>
+        <ng-template #deleteButton>
+          <button (click)="confirmingDelete = true" class="danger">Delete</button>
+        </ng-template>
+        <button (click)="closeModal()">Close</button>
+      </div>
+    </div>
+
   <ng-template #noBooks>
     <p>No books found.</p>
   </ng-template>
