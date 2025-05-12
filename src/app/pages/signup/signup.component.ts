@@ -16,6 +16,7 @@ export class SignupComponent {
   signupForm: FormGroup;
   errorMessage: string | null = null;
   errorField: string | null = null
+  isLoading = false;
 
   constructor(
     private fb: FormBuilder,
@@ -50,19 +51,26 @@ export class SignupComponent {
       email: formValue.email,
       password: formValue.password
     };
-  var errorMessage = '';
-  var errorField = '';
+  this.isLoading = true;
     this.http.post('http://localhost:5154/api/User', userPayload)
       .subscribe({
         next: () => {
-          this.errorMessage = '';this.errorField = '';
-          this.router.navigate(['/login'])
+          this.errorField = '';
+          this.errorMessage = `Successfully created ` + userPayload.name + "'s account";
+          setTimeout(()=>{
+            this.errorMessage = '';
+            this.isLoading = false;
+            this.router.navigate(['/login'])
+          },2000)
+
         },
         error: (error) => {
           if (error.status === 409) {
+            this.isLoading = false;
             this.errorMessage = 'This email is already in use.';
             this.errorField = 'email'
           } else {
+            this.isLoading = false;
             this.errorMessage = 'An unexpected error occurred.';
           }
         }

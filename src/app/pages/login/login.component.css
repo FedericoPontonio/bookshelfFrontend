@@ -27,6 +27,7 @@ form {
   
   /* Error messages */
   .error {
+    position: fixed;
     color: #d33;
     font-size: 30px;
     margin-top: -0.75rem;
@@ -63,4 +64,17 @@ form {
 
   .formValidationMessage {
     color: #d33;
+  }
+
+  #loadingIcon {
+    position: absolute;
+    left: 48%;
+    top: 8%;
+  }
+
+  #genericMessage {
+    position: absolute;
+    top: 10%;
+    background-color: rgb(39, 135, 39);
+    color: white;
   }

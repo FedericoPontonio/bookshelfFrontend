@@ -6,3 +6,21 @@ button:hover {
 body {
     margin: 0px;
 }
+:root {
+    --title-font: 'Fredericka the Great', cursive;
+    --subtitle-font:"Nunito Sans", sans-serif;
+    --body-font: 'Raleway', sans-serif;
+  }
+  
+  
+#loadingIcon {
+    animation: rotateInfinite 1s ease-in-out infinite;
+  }
+  @keyframes rotateInfinite {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
