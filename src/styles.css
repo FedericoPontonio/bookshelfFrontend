@@ -3,9 +3,24 @@ button:hover {
     cursor: pointer;
 }
 
-body {
-    margin: 0px;
-    font-family: var(--subtitle-font);
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Main container for the app */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensure it takes up the full viewport height */
+  height: 100%;
+}
+
+/* Content area grows to fill available space */
+.content {
+  flex: 1; /* Pushes the footer to the bottom */
 }
 :root {
     --title-font: 'Fredericka the Great', cursive;
@@ -14,6 +29,9 @@ body {
     --colorOne: #efaf66da;
     --colorTwo: rgba(242, 136, 75, 0.879);
     --colorThree: #104547;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
   }
   #pageDescription {
     display: flex;
@@ -54,4 +72,27 @@ body {
     to {
       transform: rotate(360deg);
     }
+  }
+
+  footer {
+    height: 50px;
+    background-color: var(--colorThree);
+    color: var(--colorOne);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    padding-left: 5%;
+    padding-right: 5%;
+    font-family: var(--subtitle-font);
+    font-weight: bold;
+  }
+  footer>a {
+    display: flex;
+    align-items: end;
+    color: inherit;
+    text-decoration: none;
+  }
+  footer>a>p {
+    margin: 0px;
   }

@@ -13,7 +13,7 @@
         <img src="assets/icon.png" alt="gnatto">
         <div>Bookshelf</div>
       </div>
-      <h3>Visualize and manage your saved books</h3>  
+      <h3>Visualize and manage your books</h3>  
     </div>
     <div  class="savedBooksDisplay" *ngIf="userSavedBooks.length; else noBooks">
       <div (click)="openModal(book)" class="bookCell"  *ngFor="let book of userSavedBooks">

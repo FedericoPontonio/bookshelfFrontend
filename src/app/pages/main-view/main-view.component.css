@@ -27,7 +27,6 @@
 .mainComponentRoot {
     display: grid;
     grid-template-columns: 3fr 1fr;
-    height: 97vh;
 }
 
 /* #pageDescription {
