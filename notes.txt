@@ -1,6 +1,7 @@
 
 -primari:
        -grafica, in particolare i modals e right column
+       -non c'è rotella in signup 
 
 secondari:
        -aggiungere switch isRead sui libri
