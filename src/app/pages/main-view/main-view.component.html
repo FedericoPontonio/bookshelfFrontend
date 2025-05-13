@@ -1,37 +1,19 @@
 <!-- main.component.html -->
 <div [ngClass]="popupMessageVisible ? '' : 'popupMessageInvisible'" class="popupMessage">{{popupMessage}}</div>
 
-<div class="modal" *ngIf="selectedBook" (click)="closeModal()">
-  <div class="modal-content"
-  [ngClass]="{'': isModalVisible, 'hidden': !isModalVisible}"
-  (click)="$event.stopPropagation()">
-    <h2>{{ selectedBook.title }}</h2>
-    <p><strong>Author:</strong> {{ selectedBook.author }}</p>
-    <img *ngIf="selectedBook.image" [src]="'https://covers.openlibrary.org/b/olid/' + selectedBook.image + '-M.jpg'" alt="Book cover" />
-    
-    <label for="notes">Personal Notes:</label>
-    <textarea [(ngModel)]="selectedBook.notes" id="notes"></textarea>
-    <button (click)="saveNotes()">💾 Update personal Notes</button>
+<div id="topViewBar">
+  <h2>Welcome back, {{ userInfo?.name }}!</h2>
+  <button id="logoutButton" (click)="logout()">Log out</button>
 
-    <!-- Custom confirmation toggle -->
-    <div *ngIf="confirmingDelete; else deleteButton">
-      <p>Are you sure you want to delete this book?</p>
-      <button (click)="confirmDelete()">Yes</button>
-      <button (click)="confirmingDelete = false">No</button>
-    </div>
-    <ng-template #deleteButton>
-      <button (click)="confirmingDelete = true" class="danger">Delete</button>
-    </ng-template>
-    <button (click)="closeModal()">Close</button>
-  </div>
 </div>
-
 <div class="mainComponentRoot">
-
   <div class="leftColumn">
     <div id="pageDescription">
-      <h2>Welcome back, {{ userInfo?.name }}!</h2>
-      <p>Visualize and manage your saved books</p>
+      <div id="title">
+        <img src="assets/icon.png" alt="gnatto">
+        <div>Bookshelf</div>
+      </div>
+      <h3>Visualize and manage your books</h3>  
     </div>
     <div  class="savedBooksDisplay" *ngIf="userSavedBooks.length; else noBooks">
       <div (click)="openModal(book)" class="bookCell"  *ngFor="let book of userSavedBooks">
@@ -43,16 +25,14 @@
   </div>
 
   <div class="rightColumn">
-    <div style="display: grid; grid-template-columns: 2fr 1fr; align-items: center; border-bottom: dashed black 2px;">
-      <h2 style="border-right: solid black 2px; height: 40px; align-items: center; display: flex; margin-left: 10px;">Add new books</h2>
-      <button id="logoutButton" (click)="logout()">Log out</button>
-    </div>
-
+      <h2 id="rightColumnTitle">Add new books</h2>
     <div class="addBookOptions">
       <div>
         <h3>Search for books to add to your collection</h3>
-        <div *ngIf="isLoading"><strong>Loading your books...</strong></div>
-        <input (input)="onSearch(searchTerm)" [(ngModel)]="searchTerm" placeholder="Search for books" />
+        <div id="searchInputLoadingIconContainer">
+          <input id="searchBooksInput" (input)="onSearch(searchTerm)" [(ngModel)]="searchTerm" placeholder="Search for books" />
+          <svg [ngClass]="isLoading ? 'loadingIcon' : 'loadingIconInvisible'" id="loadingIcon" width="64px" height="64px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="none" class="hds-flight-icon--animation-loading"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g fill="#000000" fill-rule="evenodd" clip-rule="evenodd"> <path d="M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8z" opacity=".2"></path> <path d="M7.25.75A.75.75 0 018 0a8 8 0 018 8 .75.75 0 01-1.5 0A6.5 6.5 0 008 1.5a.75.75 0 01-.75-.75z"></path> </g> </g></svg>
+        </div>
       </div>
       <strong>OR</strong>
       <button id="addBookManually" (click)="openManualAddModal()">Add Manually</button>
@@ -109,7 +89,33 @@
         </form>
       </div>
     </div>
+
+    <!-- modal for manage saved books -->
+    <div class="modal" *ngIf="selectedBook" (click)="closeModal()">
+      <div class="modal-content"
+      [ngClass]="{'': isModalVisible, 'hidden': !isModalVisible}"
+      (click)="$event.stopPropagation()">
+        <h2>{{ selectedBook.title }}</h2>
+        <p><strong>Author:</strong> {{ selectedBook.author }}</p>
+        <img *ngIf="selectedBook.image" [src]="'https://covers.openlibrary.org/b/olid/' + selectedBook.image + '-M.jpg'" alt="Book cover" />
+        
+        <label for="notes">Personal Notes:</label>
+        <textarea [(ngModel)]="selectedBook.notes" id="notes"></textarea>
+        <button (click)="saveNotes()">💾 Update personal Notes</button>
     
+        <!-- Custom confirmation toggle -->
+        <div *ngIf="confirmingDelete; else deleteButton">
+          <p>Are you sure you want to delete this book?</p>
+          <button (click)="confirmDelete()">Yes</button>
+          <button (click)="confirmingDelete = false">No</button>
+        </div>
+        <ng-template #deleteButton>
+          <button (click)="confirmingDelete = true" class="danger">Delete</button>
+        </ng-template>
+        <button (click)="closeModal()">Close</button>
+      </div>
+    </div>
+
   <ng-template #noBooks>
     <p>No books found.</p>
   </ng-template>

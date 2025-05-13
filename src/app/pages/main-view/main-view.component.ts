@@ -17,7 +17,7 @@ export class MainViewComponent implements OnInit {
   userSavedBooks: any[] = [];
   searchTerm = '';
   isLoading = false;
-  popupMessage = 'hello';
+  popupMessage = '';
   popupMessageVisible = false;
   selectedBook: any = null;
   isModalVisible = false;
@@ -125,6 +125,7 @@ confirmDelete() {
       error: (err) => {
         console.error('Error fetching books', err);
         this.isLoading = false;
+        this.searchedBooks = [];
       }
     });
   }

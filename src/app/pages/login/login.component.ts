@@ -17,6 +17,7 @@ export class LoginComponent {
   loginForm: FormGroup;
   errorMessage: string | null = null;
   errorField: string | null = null
+  isLoading =false;
 
   constructor(
     private fb: FormBuilder,
@@ -30,17 +31,28 @@ export class LoginComponent {
   }
   onSubmit() {
     if (this.loginForm.invalid) return;
+    this.isLoading = true;
     this.authService.login(this.loginForm.value).subscribe({
       next: (res: { token: string }) => {
         this.errorMessage = '';
         this.errorField = '';
         this.authService.storeToken(res.token);
+        this.isLoading = false;
         this.router.navigate(['/main']);
       },
       error: (err: any) => {
         if (err.status ===401) {
+        this.isLoading = false;
           this.errorMessage = 'Invalid credentials'
+          setTimeout(()=>{
+            this.errorMessage = '';
+          }, 2000)
         }
+        this.errorMessage = 'Internal server error, login failed.'
+        this.isLoading = false;
+        setTimeout(()=>{
+          this.errorMessage = '';
+        }, 5000)
         console.error('Login failed:', err);
       }
     });

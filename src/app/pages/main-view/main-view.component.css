@@ -1,45 +1,108 @@
+#topViewBar {
+  background-color: #104547;
+  height: 5vh;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  color: #efaf66da;
+  border-bottom: solid black 2px;
+}
+#logoutButton {
+  margin: 3%;
+  border-radius: 10px;
+  font-size: 20px;
+  height: 80%;
+  width: 100px;
+  background-color: var(--colorTwo);
+  box-shadow: 5px 5px 5px rgba(242, 136, 75, 0.311);
+
+}
+#logoutButton:active {
+  background-color: rgba(239, 154, 105, 0.879);
+  box-shadow: 2px 5px -3px #242323;
+  transform: translateY(4px) translateX(5px);
+  transition: 0.3s ease;
+}
 
 .mainComponentRoot {
     display: grid;
     grid-template-columns: 3fr 1fr;
-    width: 98vw;
-    gap: 2px;
-    height: 97vh;
 }
+
+/* #pageDescription {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    grid-template-rows: 1fr 1fr;
+    max-height:200px ;
+    margin-bottom: 20px
+} */
+
+#pageDescription>h3 {
+  margin: 0px;
+}
+/* #title {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  margin-top: 10px;
+  font-family: var(--title-font);
+  font-size: 50px;
+  position: relative;
+  left: -27px;
+  position: relative;
+  top: 15px;
+  color: #000000d7;
+}
+#title>img {
+  width: 110px;
+  position: relative;
+  bottom: 4px;
+  left: 27px;
+} */
+
 .leftColumn {
-    background-color: #efaf66da;
-    padding: 3%;
-    border-radius: 5px;
-    max-height: 100%;
-    overflow: auto;
+    background-color: var(--colorOne);
+    height: 100%;
     
 }
-.rightColumn {
-    background-color: rgba(242, 136, 75, 0.879);
-    max-height: 100%;
-    display: grid;
-    grid-template-rows: 1fr 1fr 8fr;
-    gap: 5%;
-}
-#logoutButton {
-    margin: 3%;
-    border-radius: 30px;
-    font-size: 20px;
-    height: 50px;
-    background-color: #edcb7c;
-    box-shadow: 5px 5px 5px rgba(33, 32, 32, 0.311);
 
+.rightColumn {
+    background-color: var(--colorTwo);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
-#logoutButton:active {
-    background-color: #e4ab25;
-    box-shadow: 2px 5px -3px #242323;
-    transform: translateY(4px) translateX(5px);
-    transition: 0.3s ease;
+#rightColumnTitle {
+    display: flex;
+    justify-content: center;
+    grid-template-columns: 2fr 1fr;
+    align-items: center;
+    border-bottom: dashed black 2px;
+    height: 100px;
+}
+#searchInputLoadingIconContainer {
+  display: flex;
+  gap: 10px;
+}
+  #searchBooksInput {
+    width: 100%;
+    height: 10px;
+    padding: 0.6rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  .loadingIcon {
+    height: 30px;
+  }
+  .loadingIconInvisible {
+    height: 0px;
   }
   .addBookOptions {
     display: grid;
     grid-template-columns: 4fr 0.5fr 2fr;
-    gap: 20px;
     align-items: center;
     margin: 5px;
   }
@@ -59,17 +122,15 @@
     display: flex;
     flex-direction: column;
   }
-    /* Error messages */
-    .error {
-        color: rgb(117, 22, 22);
-      }
+.error {
+    color: rgb(117, 22, 22);
+  }
 .resultsDisplay {
     display: flex;
+    flex: 1;
     flex-direction: column;
     align-items: center;
-    width: 94%;
-    max-height: 96vh;
-    background-color: rgb(242, 136, 75);
+    max-height: 150vh;
     padding: 3%;
     overflow: auto;
     gap: 10px;
@@ -80,6 +141,7 @@
     height: 0px;
     margin: 0px;
     padding: 0px;
+    transition: 1s ease;
 }
 
 .bookCell {
@@ -89,15 +151,16 @@
     border: solid black 1px;
     border-radius: 10px;
     padding: 1%;
-    font-family: sans-serif;
+    font-family: var(--body-font);
     font-size: 20px;
     box-shadow: 10px 5px 5px rgba(33, 32, 32, 0.311);
     background-color: rgb(224, 190, 148);
-    width: 250px;
+    width: 220px;
 }
 .bookCell:hover {
     background-color: rgba(190, 144, 76, 0.756);
     transition: 0.3s ease;
+    cursor: pointer;
 }
 
 .bookCover {
@@ -115,6 +178,7 @@ li {
     gap: 1%;
     justify-content: space-around;
     align-content: space-around;
+    padding: 3%;
 }
 
 .popupMessage {
@@ -132,7 +196,8 @@ li {
     left: 40%;
     top: 30%;
     font-weight: 700;
-    font-family: sans-serif;
+    font-family: var(--subtitle-font);
+    font-style: italic;
     background-color: rgb(174, 166, 166);
     z-index: 100;
 }
@@ -175,7 +240,6 @@ li {
     background-color: #e53935;
     color: white;
     border: none;
-    padding: 0.5em 1em;
     margin-top: 1em;
     cursor: pointer;
   }
