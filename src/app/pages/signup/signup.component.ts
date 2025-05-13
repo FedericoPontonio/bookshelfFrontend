@@ -51,8 +51,7 @@ export class SignupComponent {
       email: formValue.email,
       password: formValue.password
     };
-  var errorMessage = '';
-  var errorField = '';
+    this.isLoading = true;
     this.http.post('https://bookshelf-fuio.onrender.com/api/User', userPayload)
       .subscribe({
         next: () => {
