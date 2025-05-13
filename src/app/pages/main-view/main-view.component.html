@@ -75,14 +75,15 @@
           <label>Author:</label>
           <div class="error" *ngIf="authorRef.invalid && authorRef.touched">Author is required.</div>
           <input [(ngModel)]="pendingBookToAdd.author" name="author" required #authorRef="ngModel" />
-        
-          <label>Cover Image Key (optional):</label>
+          
+          <!-- to fix and implement -->
+          <!-- <label>Cover Image Key (optional):</label>
           <input [(ngModel)]="pendingBookToAdd.image" name="image" />
         
           <div *ngIf="pendingBookToAdd.image">
             <p>Preview:</p>
             <img [src]="'https://covers.openlibrary.org/b/olid/' + pendingBookToAdd.image + '-M.jpg'" alt="Book cover" />
-          </div>
+          </div> -->
         
           <button type="submit" [disabled]="manualForm.invalid">Add Book</button>
           <button type="button" (click)="cancelAddBook()">Cancel</button>
