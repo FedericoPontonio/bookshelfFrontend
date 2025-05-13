@@ -56,8 +56,11 @@
       <div class="modal-content">
         
         <p>Are you sure you want to add <strong>“{{ pendingBookToAdd?.title }}”</strong>  to your collection?</p>
-        <button (click)="confirmAddBook()">Yes</button>
-        <button (click)="cancelAddBook()">No</button>
+        <div class="confirmAddBookButtons">
+          <button (click)="confirmAddBook()">Yes</button>
+          <button (click)="cancelAddBook()">No</button>
+        </div>
+
       </div>
     </div>
 
@@ -84,9 +87,11 @@
             <p>Preview:</p>
             <img [src]="'https://covers.openlibrary.org/b/olid/' + pendingBookToAdd.image + '-M.jpg'" alt="Book cover" />
           </div> -->
-        
-          <button type="submit" [disabled]="manualForm.invalid">Add Book</button>
-          <button type="button" (click)="cancelAddBook()">Cancel</button>
+          <div class="confirmAddBookButtons">
+            <button type="submit" [disabled]="manualForm.invalid">Add Book</button>
+            <button type="button" (click)="cancelAddBook()">Cancel</button>
+          </div>
+
         </form>
       </div>
     </div>
@@ -100,20 +105,26 @@
         <p><strong>Author:</strong> {{ selectedBook.author }}</p>
         <img *ngIf="selectedBook.image" [src]="'https://covers.openlibrary.org/b/olid/' + selectedBook.image + '-M.jpg'" alt="Book cover" />
         
-        <label for="notes">Personal Notes:</label>
-        <textarea [(ngModel)]="selectedBook.notes" id="notes"></textarea>
-        <button (click)="saveNotes()">💾 Update personal Notes</button>
+        <div style="display: flex; flex-direction: column; gap: 5px; align-items: center;">
+          <label for="notes">Personal Notes:</label>
+          <textarea style="height: 30px; width: 300px;" [(ngModel)]="selectedBook.notes" id="notes"></textarea>
+          <button style="border-radius: 5px; width: 200px;" (click)="saveNotes()">💾 Update personal Notes</button>
+        </div>
+
     
         <!-- Custom confirmation toggle -->
         <div *ngIf="confirmingDelete; else deleteButton">
           <p>Are you sure you want to delete this book?</p>
-          <button (click)="confirmDelete()">Yes</button>
-          <button (click)="confirmingDelete = false">No</button>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 10px;">
+            <button style="border: solid red 2px;" (click)="confirmDelete()">Yes</button>
+            <button style="border: solid green 2px;" (click)="confirmingDelete = false">No</button>
+          </div>
+
         </div>
         <ng-template #deleteButton>
           <button (click)="confirmingDelete = true" class="danger">Delete</button>
         </ng-template>
-        <button (click)="closeModal()">Close</button>
+        <button id="logoutButton" (click)="closeModal()">Close</button>
       </div>
     </div>
 

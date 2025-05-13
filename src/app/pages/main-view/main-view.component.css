@@ -30,37 +30,9 @@
     height: 100%;
 }
 
-/* #pageDescription {
-    display: grid;
-    align-items: center;
-    justify-items: center;
-    grid-template-rows: 1fr 1fr;
-    max-height:200px ;
-    margin-bottom: 20px
-} */
-
 #pageDescription>h3 {
   margin: 0px;
 }
-/* #title {
-  display: flex;
-  align-items: center;
-  justify-content: end;
-  margin-top: 10px;
-  font-family: var(--title-font);
-  font-size: 50px;
-  position: relative;
-  left: -27px;
-  position: relative;
-  top: 15px;
-  color: #000000d7;
-}
-#title>img {
-  width: 110px;
-  position: relative;
-  bottom: 4px;
-  left: 27px;
-} */
 
 .leftColumn {
     background-color: var(--colorOne);
@@ -107,11 +79,29 @@
     align-items: center;
     margin: 5px;
   }
+  .confirmAddBookButtons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .confirmAddBookButtons>button {
+    border-radius: 5px;
+    width: 100px;
+    border: solid red 2px;
+  }
+  .confirmAddBookButtons>button:first-child {
+    border: solid green 2px;
+
+  }
+
   #addBookManually {
     margin: 3%;
     border-radius: 10px;
-    background-color: #97ee65c7;
+    min-height: 50px;
+    background-color: rgb(248, 216, 123);
     box-shadow: 5px 5px 5px rgba(33, 32, 32, 0.311);
+    font-family: var(--subtitle-font);
+    font-size: 18px;
   }
   #addBookManually:active {
     background-color: #97ee6588;
@@ -228,7 +218,7 @@ li {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: rgb(221, 126, 126);
+    background: var(--colorOne);
     padding: 1.5rem;
     border-radius: 10px;
     width: 40%;
@@ -250,25 +240,27 @@ li {
 
   @keyframes slideIn {
     0% {
+        opacity: 0.3;
+        background-color:var(--colorThree);
         transform: translateY(-100%); /* Start slightly above */
     }
     70% {
-        background-color: rgba(20, 24, 71, 0);
+        background-color:rgba(16,	69,	71,0.3);
         transform: translateY(0); /* End in place */
     }
     100% {
-        background-color: rgba(16, 19, 57, 0.838);
+      background-color:rgba(16,	69,	71, 0.84);
     }
 }
 
 @keyframes slideOut {
     0% {
         display: flex;
-        background-color: rgba(16, 19, 57, 0.838);
+      background-color:rgba(16,	69,	71, 0.84);
         transform: translateY(0); /* Start in place */
     }
     30% {
-        background-color: rgba(38, 49, 168, 0);
+      background-color:rgba(16,	69,	71,0.3);
         transform: translateY(0); /* End in place */
     }
     100% {
