@@ -5,8 +5,8 @@
         -menzionare esplicitamente openlibrary nella mia pagina
  - capire perchè la ricerca dei libri è diventata lenta e graficamente buggata
  -quando barra ricerca è vuota, searchdisplay non si chiude
- -rotella in login, signup, e ricerca libri
- -aggiungere messaggio errore generico e/o 500 in ligin/signup
+ -rotella in login, signup, e ricerca libri -- done
+ -aggiungere messaggio errore generico e/o 500 in ligin/signup -- parzialmente done (feedback ma non per i casi generici)
 
  -preparare discorso
 

@@ -48,6 +48,11 @@ export class LoginComponent {
             this.errorMessage = '';
           }, 2000)
         }
+        this.errorMessage = 'Internal server error, login failed.'
+        this.isLoading = false;
+        setTimeout(()=>{
+          this.errorMessage = '';
+        }, 5000)
         console.error('Login failed:', err);
       }
     });

@@ -17,7 +17,7 @@ export class MainViewComponent implements OnInit {
   userSavedBooks: any[] = [];
   searchTerm = '';
   isLoading = false;
-  popupMessage = 'hello';
+  popupMessage = '';
   popupMessageVisible = false;
   selectedBook: any = null;
   isModalVisible = false;
