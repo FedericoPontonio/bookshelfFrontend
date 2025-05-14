@@ -116,6 +116,7 @@ confirmDelete() {
 
   onSearch(query: string): void {
     this.isLoading = true;
+    this.closeModal();
     this.bookSearchService.searchBooks(query).subscribe({
       next: (data) => {
         // console.log('Books found:', data.docs);
@@ -205,6 +206,8 @@ cancelAddBook() {
   // }
 
   openManualAddModal(): void {
+    this.isLoading = false;
+    this.searchedBooks = [];
     const userId = +this.userInfo!.userId!;
     this.pendingBookToAdd = {
       userId,

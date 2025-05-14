@@ -56,13 +56,27 @@
 }
 #searchInputLoadingIconContainer {
   display: flex;
-  gap: 10px;
+  width: 100%;
+}
+.addBookFromSearch {
+    display: flex;
+    flex-direction: column;
+    margin: 3%;
+    border-radius: 10px;
+    min-height: 50px;
+    background-color: rgb(248, 216, 123);
+    box-shadow: 5px 5px 5px rgba(33, 32, 32, 0.311);
+    font-family: var(--subtitle-font);
+    border: solid 2px rgb(55, 55, 55);
+    padding: 3%;
+}
+.addBookFromSearch>h3 {
+  margin: 0px;
 }
   #searchBooksInput {
     width: 100%;
     height: 10px;
     padding: 0.6rem;
-    margin-bottom: 1rem;
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 1rem;
@@ -75,8 +89,8 @@
   }
   .addBookOptions {
     display: grid;
-    grid-template-columns: 4fr 0.5fr 2fr;
-    align-items: center;
+    justify-content: center;
+    gap: 10px;
     margin: 5px;
   }
   .confirmAddBookButtons {
@@ -102,6 +116,10 @@
     box-shadow: 5px 5px 5px rgba(33, 32, 32, 0.311);
     font-family: var(--subtitle-font);
     font-size: 18px;
+  }
+  .addBookManuallyModal {
+    display: flex;
+  justify-content: center;
   }
   #addBookManually:active {
     background-color: #97ee6588;
@@ -221,6 +239,7 @@ li {
     background: var(--colorOne);
     padding: 1.5rem;
     border-radius: 10px;
+    min-width: 300px;
     width: 40%;
     max-height: 80vh;
     overflow-y: auto;
