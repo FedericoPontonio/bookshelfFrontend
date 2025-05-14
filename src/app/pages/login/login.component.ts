@@ -18,6 +18,7 @@ export class LoginComponent {
   errorMessage: string | null = null;
   errorField: string | null = null
   isLoading =false;
+  showPassword = false;
 
   constructor(
     private fb: FormBuilder,
@@ -29,6 +30,11 @@ export class LoginComponent {
       password: ['', Validators.required],
     });
   }
+
+  toggleShowPassword() {
+    this.showPassword = !this.showPassword;
+  }
+
   onSubmit() {
     if (this.loginForm.invalid) return;
     this.isLoading = true;

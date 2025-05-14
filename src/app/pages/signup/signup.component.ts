@@ -17,6 +17,7 @@ export class SignupComponent {
   errorMessage: string | null = null;
   errorField: string | null = null
   isLoading = false;
+  showPassword = false;
 
   constructor(
     private fb: FormBuilder,
@@ -32,6 +33,10 @@ export class SignupComponent {
     
   }
   
+  toggleShowPassword() {
+    this.showPassword = !this.showPassword;
+  }
+
 
   onSubmit(): void {
     if (this.signupForm.invalid) return;
